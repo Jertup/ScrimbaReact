@@ -1,0 +1,17 @@
+# dependencies
+node_modules/
+
+# parcel cache
+.parcel-cache/
+
+# build output
+dist/
+
+# logs
+*.log
+
+# environment variables
+.env
+
+# system files
+.DS_Store
