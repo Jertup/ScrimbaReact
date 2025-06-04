@@ -29,6 +29,15 @@ header > span {
     font-weight: 500;
 }
 
+article.journal-entry {
+    display: flex;
+    margin: 25px auto;
+    max-width: 700px;
+    padding: 24px;
+    box-sizing: border-box;
+}
+
+
 article.journal-entry .marker {
     width: 7px;
     margin-right: 4px;
@@ -77,6 +86,8 @@ article.journal-entry .main-image {
     line-height: 1.5;
     font-size: 0.8rem;
     display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
     -webkit-box-orient: vertical;  
     overflow: hidden;
 }
