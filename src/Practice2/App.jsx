@@ -8,7 +8,7 @@ function App() {
       <Entry
         view={{
           img: "https://scrimba.com/links/travel-journal-japan-image-url",
-          alt: "Mount Fuji"
+          alt: "Mount Fuji img"
           }
         }
         country="Japan"
