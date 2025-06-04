@@ -6,8 +6,8 @@ function App() {
     <>
       <Header />
       <Entry
-        view={{
-          img: "https://scrimba.com/links/travel-journal-japan-image-url",
+        img={{
+          src: "https://scrimba.com/links/travel-journal-japan-image-url",
           alt: "Mount Fuji img"
           }
         }
