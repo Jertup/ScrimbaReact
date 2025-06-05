@@ -1,13 +1,16 @@
-
+import { useMemo } from "react"
 import Joke from "./Joke"
 import jokesData from "./jokesData"
 
-export default function Ap() {
+export default function App() {
+  const enrichedJokes = useMemo(() =>
+    jokesData.map((joke, i) => ({ ...joke, id: i })), []
+  );
   return (
     <main>
-      {jokesData.map((joke, index) => (
+      {enrichedJokes.map((joke) => (
         <Joke 
-          key={index}
+          key={joke.id}
           setup={joke.setup}
           punchline={joke.punchline}
           upvotes={joke.upvotes}

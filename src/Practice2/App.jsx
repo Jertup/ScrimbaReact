@@ -5,15 +5,10 @@ import data from './data.js';
 // Simplifying the App component to render the Header and the mapped location data
 function App() {
   // Mapping the location data into an array of Entry components instead of hardcoding each one
-const locationData = data.map((item, index) => (
+const locationData = data.map((item) => (
   <Entry
-    key={index}
-    img={item.img}
-    location={item.title}
-    country={item.country}
-    google={item.googleMapsLink}
-    date={item.dates}
-    info={item.text}
+    key={item.id}
+    {...item}
   />
 ));
 // Returning the Header and the mapped Entry components
