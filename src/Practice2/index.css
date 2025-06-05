@@ -19,13 +19,18 @@ header {
     height: 55px;
 }
 
-header > img {
-    width: 24px;
-    margin-right: 7px;
+header nav {
+    display: flex;
+    align-items: center;
 }
 
-header > span {
-    font-size: 0.9rem;
+header nav img {
+    width: 30px;
+    margin-right: 5px;
+}
+
+header nav span {
+    font-size: 1.2rem;
     font-weight: 500;
 }
 

@@ -1,22 +1,26 @@
 import Header from './components/Header.jsx';
 import Entry from './components/entry.jsx';
+import data from './data.js';
 
+// Simplifying the App component to render the Header and the mapped location data
 function App() {
+  // Mapping the location data into an array of Entry components instead of hardcoding each one
+const locationData = data.map((item, index) => (
+  <Entry
+    key={index}
+    img={item.img}
+    location={item.title}
+    country={item.country}
+    google={item.googleMapsLink}
+    date={item.dates}
+    info={item.text}
+  />
+));
+// Returning the Header and the mapped Entry components
   return (
     <>
       <Header />
-      <Entry
-        img={{
-          src: "https://scrimba.com/links/travel-journal-japan-image-url",
-          alt: "Mount Fuji img"
-          }
-        }
-        country="Japan"
-        google="https://www.google.com/maps/place/Mount+Fuji/@35.3606421,138.7170637,15z/data=!3m1!4b1!4m6!3m5!1s0x6019629a42fdc899:0xa6a1fcc916f3a4df!8m2!3d35.3606255!4d138.7273634!16zL20vMGNrczA?entry=ttu"
-        location="Mount Fuji"
-        date="12 Jan, 2021 - 24 Jan, 2021"
-        info="Mount Fuji is the tallest mountain in Japan, standing at 3,776 meters (12,380 feet). Mount Fuji is the single most popular tourist site in Japan, for both Japanese and foreign tourists."
-        />
+      {locationData}
     </>
   )
 }

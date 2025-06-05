@@ -32,7 +32,7 @@ function Entry(props) {
                     alt="map marker icon"
                 />
                 <span className="country">{props.country}</span>
-                <a href={props.google}>View on Google Maps.</a>
+                <a href={props.google} target="_blank" rel="noopener noreferrer">View on Google Maps.</a>
                 <h2 className="entry-title">{props.location}</h2>
                 <p className="trip-dates">{props.date}</p>
                 <p className="entry-text">{props.info}</p>
