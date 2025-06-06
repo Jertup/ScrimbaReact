@@ -4,9 +4,10 @@ export default function App() {
     let [counter, counting] = React.useState(0)
     const handleClick = (type) =>{
       if (type === "+") {
-        counting(counter +1);
+        // Doing this instead of counting(counter + 1) is a good practice to avoid stale state issues
+        counting(prevCount=> prevCount + 1);
       } else if (type === "-") {
-        counting(counter -1);
+        counting(prevCount=> prevCount - 1);
       }
     };
     //He did infact say it 17 times in context of react + 1 out of context "Wont leave you in this STATE"
