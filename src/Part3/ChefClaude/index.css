@@ -29,12 +29,21 @@ header {
 form {
     padding: 10px 30px;
 }
+.form-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
 .add-ingredient-form {
     display: flex;
     justify-content: center;
     gap: 16px;
-    height: auto;
+    width: 100%;
+    max-width: 600px;
     margin-top: 16px;
+    margin-bottom: 0;
 }
 
 .add-ingredient-form > input {
@@ -63,4 +72,14 @@ form {
 .add-ingredient-form > button:before {
     content: "+";
     margin-right: 5px;
+}
+
+.ingredient-list {
+    margin-top: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    width: 100%;
+    max-width: 600px;
 }
