@@ -29,6 +29,7 @@ const submitEvent = (event) => {
           Add Ingredient
         </button>
       </form>
+            <h1 className="ingredient-header">Ingredients on hand:</h1>
       <ul className="ingredient-list">
         {ingredientList}
       </ul>
