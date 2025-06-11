@@ -10,15 +10,14 @@ function App() {
    */
 
   function signUp(formData) {
-    const email = formData.get("email")
-    const password = formData.get("password")
-    const employment = formData.get("employmentStatus")
-    const dietary = formData.getAll("dietaryRestrictions")
-    console.log(dietary)
-    console.log(employment)
-    console.log(password)
+    const data = Object.fromEntries(formData)
+    const dietaryRestrictions = formData.getAll("dietaryRestrictions")
+    const allData = {
+      ...data,
+      dietaryRestrictions
+    }
+    console.log(allData);
   }
-
   return (
     <section>
       <h1>Signup form</h1>
