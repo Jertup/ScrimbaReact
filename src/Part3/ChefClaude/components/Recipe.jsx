@@ -1,7 +1,7 @@
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 function Recipe(props) {
-    const { ingredientList, fetchRecipe, loading, recipeText } = props;
+    const { ingredientList, fetchRecipe, loading, recipeText, recipeSection } = props;
 
     return (
       <section className="ingredient-section">
@@ -10,7 +10,7 @@ function Recipe(props) {
           {ingredientList}
         </ul>
         {ingredientList.length >= 4 && 
-        <div className="recipe-button-container">
+        <div ref={recipeSection}className="recipe-button-container">
           <div className="recipe-header">
             <h2>Ready for a recipe?</h2>
             <p>Generate a recipe from your list of ingredients.</p>
