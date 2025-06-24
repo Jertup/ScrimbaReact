@@ -1,5 +1,4 @@
 import ReactMarkdown from 'react-markdown'
-import remarkGfm from 'remark-gfm'
 function Recipe(props) {
     const { ingredientList, fetchRecipe, loading, recipeText, recipeSection } = props;
 

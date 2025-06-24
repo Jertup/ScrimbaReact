@@ -12,6 +12,7 @@
   "dependencies": {
     "@anthropic-ai/sdk": "^0.54.0",
     "@huggingface/inference": "^4.0.4",
+    "clsx": "^2.1.1",
     "nanoid": "^5.1.5",
     "react": "^19.1.0",
     "react-confetti": "^6.4.0",
