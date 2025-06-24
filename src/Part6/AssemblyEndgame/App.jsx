@@ -2,24 +2,37 @@ import React from "react"
 import Header from "./components/Header"
 import { languages } from "./languages"
 import { clsx } from "clsx"
+import { getFarewellText, getRandomWord } from "./utils.js"
+import Confetti from "react-confetti"
+
 
 export default function AssemblyEndgame() {
-	const [currentWord, setCurrentWord] = React.useState("react");
+	const [currentWord, setCurrentWord] = React.useState(getRandomWord());
 	const [guessedLetters, setGuessedLetters] = React.useState([]);
 	const alphabet = "abcdefghijklmnopqrstuvwxyz"
+	console.log(currentWord)
 
 	const wrongGuessCount = guessedLetters.filter(letter => !currentWord.includes(letter)).length
-	const isGameWon =
-		currentWord.split("").every(letter => guessedLetters.includes(letter))
+	const isGameWon = currentWord.split("").every(letter => guessedLetters.includes(letter))
 	const isGameLost = wrongGuessCount >= languages.length - 1
 	const isGameOver = isGameWon || isGameLost
-	const gameStatusClass = clsx("game-status", {won: isGameWon, lost: isGameLost});
+	const lastGuessedLetter = guessedLetters[guessedLetters.length - 1]
+	const isLastGuessIncorrect = lastGuessedLetter && !currentWord.includes(lastGuessedLetter)
+	const gameStatusClass = clsx("game-status", {win: isGameWon, lost: isGameLost, farewell: isLastGuessIncorrect});
 
-	const wordLetters = currentWord.split("").map((letter, i) => (
-		<span key={i} className="letter">
-			 {guessedLetters.includes(letter) ? letter.toUpperCase() : ""}
-		</span>
-	));
+const wordLetters = currentWord.split("").map((letter, i) => {
+    const isGuessed = guessedLetters.includes(letter);
+    return (
+        <span
+            key={i}
+            className={clsx("letter", {
+                missing: isGameLost && !isGuessed
+            })}
+        >
+            {(isGuessed || isGameLost) ? letter.toUpperCase() : ""}
+        </span>
+    );
+});
 	const alphabetElements = alphabet.split("").map((letter) => { 
 		const isGuessed = guessedLetters.includes(letter);
 		const isCorrect = isGuessed && currentWord.includes(letter);
@@ -28,9 +41,8 @@ export default function AssemblyEndgame() {
 			correct: isCorrect,
 			wrong: isWrong
 			})
-			console.log(className);
 		return(
-			<button key={letter} className={className} onClick={isGameOver ? null : () => handleGuess(letter)}>
+			<button key={letter} className={className} disabled={isGameOver} onClick={() => handleGuess(letter)}>
 				{letter.toUpperCase()}
 			</button>
 		)
@@ -59,33 +71,40 @@ export default function AssemblyEndgame() {
 	};
 
 	function renderGameStatus() {
-		if (!isGameOver) {
-			return null
+		if (!isGameOver && isLastGuessIncorrect) {
+			return (<p className="winMessage">{getFarewellText(languages[wrongGuessCount - 1]?.name)}</p>)
 		}
 		if (isGameWon) {
 			return (
 				<>
-				<h2 className="status">You Win!</h2>
-				<p className="winMessage">Well done! 🎉</p>
-				</> )
-		} else {
-			return (					
-				<>
-				<h2 className="status">Game Over!</h2>
-				<p className="winMessage">You lose! Better start learning Assembly 😭</p>
-				</>)
+					<h2 className="status">You Win!</h2>
+					<p className="winMessage">Well done! 🎉</p>
+				</>
+			)
 		}
+		if (isGameLost) {
+			return (
+				<>
+					<h2 className="status">Game Over!</h2>
+					<p className="winMessage">You lose! Better start learning Assembly 😭</p>
+				</>
+			)
+		}
+		// Add this line:
+		return null;
 	}
-
+	function newGame() {
+		setCurrentWord(getRandomWord());
+		setGuessedLetters([]);
+	}
 
 	return (
 		<main className="main-container">
+			{isGameWon && <Confetti recycle={false} numberOfPieces={1000} />}
 			<Header />
-			{isGameOver &&
 			<section className={gameStatusClass}>
 				{renderGameStatus()}
 			</section>
-			}
 			<section className="language-chips">
 				{languageElements}
 			</section>
@@ -95,7 +114,7 @@ export default function AssemblyEndgame() {
 			<section className="keyboard">
 				{alphabetElements}
 			</section>
-			{isGameOver &&<button className="new-game">New Game</button>}
+			{isGameOver &&<button className="new-game" onClick={()=> newGame()}>New Game</button>}
 		</main>
 	)
 }

@@ -50,7 +50,7 @@ export default function App() {
 
   return (
     <main className="tenzies-app">
-      {gameWon && <Confetti />}
+      {gameWon && <Confetti recycle={false} numberOfPieces={1000}/>}
       <h1 className="title">Tenzies</h1>
       <p className="instructions">
         Roll until all dice are the same. Click each die to freeze it at its current value between rolls.
